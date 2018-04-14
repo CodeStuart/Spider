@@ -25,11 +25,12 @@ class Sc extends Thread
 	static int num=0;
 	static int html=0;
 	String str;
-	int load=500000;
+	int load=50000;
+	int count=1;
 	Sc(){
 		try
 		{
-			socket=new Socket("192.168.0.0",9999);
+			socket=new Socket("127.0.0.1",9999);
 			reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer=new PrintWriter(socket.getOutputStream());
 			writer.println("母蜘蛛一：线程连接成功!");
@@ -111,7 +112,7 @@ class Sc extends Thread
 					URL url = new URL("http://"+sb);
 					br = new BufferedReader(new InputStreamReader(url
 							.openStream(),"utf-8"));
-					fw = new FileWriter(new File("D:\\抓取文件\\"+(html++)+".txt"));
+					fw = new FileWriter(new File("D:\\Java\\SFile\\"+(html++)+".txt"));
 					String line;
 					while ((line = br.readLine()) != null) {
 						fw.write(line);
@@ -342,7 +343,9 @@ class Sc extends Thread
 		db1.setURL("internetspider");
 		for(int a=0;a<listip.size();a++){
 			s=listip.get(a);
-			sql="insert ActiveIp(ip) values('"+s+"')";
+			//sql="insert ActiveIp(ip) values('"+s+"')";
+			count++;
+			sql="insert ActiveIp(id,ip) values('"+String.valueOf(count)+"','"+s+"')";
 			db1.setSQL(sql);
 			db1.MysqlRun();
 			try{

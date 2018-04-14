@@ -10,7 +10,7 @@ public class  Mysql
 	static String sql;
 	static String linktype="com.mysql.jdbc.Driver";
 	static String username="root";
-	static String password="123456";
+	static String password="";
 	static Connection con=null;
 	public static PreparedStatement ps=null;
 	public Mysql(){

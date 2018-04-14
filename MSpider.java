@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.*;
 import java.io.*;
-import util.DBHelper;
+import util.Mysql;
 class MSpider 
 {
-	DBHelper db1=null;
+	Mysql db1=null;
 	static int index=0;
 	static ResultSet ret = null;  
 	ServerSocket serversocket;
@@ -17,6 +17,7 @@ class MSpider
 	Queue<Integer> num=new LinkedList<Integer>(); 
 	static BlockingQueue<Integer> mysqlip=new LinkedBlockingQueue<Integer>();//数据库中ip
 	MSpider(){
+		System.out.println("控制台程序开始运行:");
 		for(int i=0;i<300;i++)num.add(i);
 		for(int i=0;i<100000;i++)mysqlip.add(i);
 		try
@@ -144,11 +145,11 @@ class MSpider
 		String sql="";
 		int x=0;
 		String s;
-		db1 = new DBHelper();//创建DBHelper对象 
+		db1 = new Mysql();//创建DBHelper对象 
 		db1.setURL("internetspider");
 		sql="select count(*) from ActiveIp";
 		db1.setSQL(sql);
-		db1.DBRun();
+		db1.MysqlRun();
 			try{
 			ret = db1.ps.executeQuery();
 			if(ret != null){
@@ -156,7 +157,7 @@ class MSpider
                     x = ret.getInt(1);
                 }
 			}
-			}
+		}
 			catch(SQLException ex){
 					ex.printStackTrace();
 					}
@@ -166,6 +167,5 @@ class MSpider
 	public static void main(String[] args) 
 	{
 		new MSpider();
-		
 	}
 }
