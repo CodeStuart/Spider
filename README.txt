@@ -18,3 +18,5 @@ ip           char         30          是             否
 2022 4.4 添加二行
 2022 4.4 添加三行
 Creating a new branch.
+
+Creating a new branch is quick & simple.
